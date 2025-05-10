@@ -2,6 +2,7 @@
 // CS5610 - Summer 1 2025
 
 import Labs from "./Labs";
+import Kambaz from "./Kambaz";
 import { HashRouter, Route, Routes, Navigate } from "react-router-dom";
 
 export default function App() {
@@ -9,8 +10,9 @@ export default function App() {
     <HashRouter>
       <div>
         <Routes>
-          <Route path="/" element={<Navigate to="Labs" />} />
+          <Route path="/" element={<Navigate to="Kambaz" />} />
           <Route path="/Labs/*" element={<Labs />} />
+          <Route path="/Kambaz/*" element={<Kambaz />} />
         </Routes>
       </div>
     </HashRouter>
