@@ -77,7 +77,7 @@ export default function Assignments() {
                 </li>
             </ul>
             <h3 id="wd-assignments-title">
-                PROJECT 10% of Total <button>+</button> </h3>
+                PROJECTS 10% of Total <button>+</button> </h3>
             <ul id="wd-assignment-list">
                 <li className="wd-assignment-list-item">
                     <a href="#/Kambaz/Courses/1234/Assignments/123"
