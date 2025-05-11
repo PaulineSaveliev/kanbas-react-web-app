@@ -4,10 +4,11 @@
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        <label htmlFor="wd-name">Assignment Name</label><br />
+        <label htmlFor="wd-name" defaultValue="Assignment Name"></label><br />
         <input id="wd-name" value="A1 - History" /><br /><br />
-        <textarea id="wd-description" cols={30} rows={10}>
-          Do questions 1-15 at the back of chapter 1, then questions 4-13 at the back of chapter 2. Write a few paragraphs about the documentary in class and then include a description about yourself. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc.
+        <textarea id="wd-description" cols={30} rows={10}
+            defaultValue="Do questions 1-15 at the back of chapter 1, then questions 4-13 at the back of chapter 2. Write a few paragraphs about the documentary in class and then include a description about yourself. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc."
+        >
         </textarea>
         <br /><br />
         <table>
@@ -72,11 +73,11 @@ export default function AssignmentEditor() {
             </td>
             <td>
                 <label htmlFor="wd-assign-to">Assign to</label><br/>
-                <input id="wd-assign-to" value={'Everyone'} /><br /><br />
+                <input id="wd-assign-to" defaultValue="Everyone" /><br /><br />
 
                 <label htmlFor="wd-due-date">Due</label><br/>
                 <input type="date"
-                        value="2025-05-13"
+                        defaultValue="2025-05-13"
                         id="wd-due-date"/><br/><br />
                 
                 <table>
@@ -84,13 +85,13 @@ export default function AssignmentEditor() {
                         <td>
                         <label htmlFor="wd-available-from">Available From</label><br/>
                         <input type="date"
-                                value="2025-05-06"
+                                defaultValue="2025-05-06"
                                 id="wd-available-from"/>
                         </td>
                         <td>
                         <label htmlFor="wd-available-until">Available Until</label><br/>
                         <input type="date"
-                                value="2025-05-20"
+                                defaultValue="2025-05-20"
                                 id="wd-available-until"/><br/>
                         </td>
                     </tr>

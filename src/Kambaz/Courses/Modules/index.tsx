@@ -32,11 +32,15 @@ export default function Modules() {
                   <li className="wd-content-item">Introduction to the course</li>
                   <li className="wd-content-item">History of Environmental Action</li>
                 </ul>
+              </li>
+              <li>
                 <span className="wd-title">READING</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Fundamentals of Environmental Science - ch.1</li>
                   <li className="wd-content-item">Fundamentals of Environmental Science - ch.2</li>
                 </ul>
+              </li>
+              <li>
                 <span className="wd-title">SLIDES</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Introduction</li>
@@ -56,10 +60,14 @@ export default function Modules() {
                   <li className="wd-content-item">Freshwater Environments</li>
                   <li className="wd-content-item">Saltwater Environments</li>
                 </ul>
+              </li>
+              <li>
                 <span className="wd-title">READING</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Fundamentals of Environmental Science - ch.3</li>
                 </ul>
+              </li>
+              <li>
                 <span className="wd-title">SLIDES</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Water Cycle</li>
@@ -77,11 +85,15 @@ export default function Modules() {
                 <ul className="wd-content">
                   <li className="wd-content-item">Terrestrial Environments</li>
                 </ul>
+              </li>
+              <li>
                 <span className="wd-title">READING</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Fundamentals of Environmental Science - ch.4</li>
                   <li className="wd-content-item">Fundamentals of Environmental Science - ch.5</li>
                 </ul>
+                </li>
+              <li>
                 <span className="wd-title">SLIDES</span>
                 <ul className="wd-content">
                   <li className="wd-content-item">Terrestrial Environments</li>
