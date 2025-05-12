@@ -1,9 +1,18 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
+
 export default function Lab1() {
     return (
       <div id="wd-lab1">
+        {/* Personal information */}
+        <h2>Personal Information</h2>
+        <div id="wd-personal-info">
+            Name: Pauline Saveliev<br />
+            Course: CS5610 Summer 1 2025<br />
+            Section: CRN 41980<br />
+            <a href="https://github.com/PaulineSaveliev/kanbas-react-web-app/tree/main" id="wd-repo-link" target="_blank">Repository</a><br/>
+        </div>
         <h2>Lab 1</h2>
         {/* Lab - Heading Tags */}
         <h3>HTML Examples</h3>
