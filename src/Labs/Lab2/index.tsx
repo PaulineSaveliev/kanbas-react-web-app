@@ -2,7 +2,7 @@
 // CS5610 - Summer 1 2025
 
 import "./index.css"
-import BackgroundColors from "./backgroundColors";
+import BackgroundColors from "./BackgroundColors";
 import Borders from "./Borders";
 import Padding from "./Padding";
 import Corners from "./Corners";
@@ -13,10 +13,17 @@ import Float from "./Float";
 import GridLayout from "./GridLayout";
 import Flex from "./Flex";
 import ReactIconsSampler from "./ReactIcons";
+import { Container } from "react-bootstrap";
+import BootstrapGrids from "./BootstrapGrids";
+import ScreenSizeLabel from "./ScreenSizeLabel";
+import BootstrapTables from "./BootstrapTables";
+import BootstrapLists from "./BootstrapLists"
+import BootstrapForms from "./BootstrapForms"
+import BootstrapNav from "./BootstrapNavigation"
 
 export default function Lab2() {
   return (
-    <div id="wd-lab2">
+    <Container>
         <h2>Lab 2 - Cascading Style Sheets</h2>
         <h3>Styling with the STYLE attribute</h3>
         <p>
@@ -82,5 +89,13 @@ export default function Lab2() {
         <GridLayout />
         <Flex />
         <ReactIconsSampler />
-    </div>
+        <br />
+        <BootstrapGrids />
+        <ScreenSizeLabel />
+        <BootstrapTables />
+        <BootstrapLists />
+        <BootstrapForms />
+        <BootstrapNav />
+        <br />
+    </Container>
 );}
