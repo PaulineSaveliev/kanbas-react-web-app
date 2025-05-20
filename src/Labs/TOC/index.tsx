@@ -24,6 +24,6 @@ export default function TOC() {
      </Nav.Item>
      <Nav.Item>
        <Nav.Link id="wd-github" href="https://github.com/PaulineSaveliev/kanbas-react-web-app/tree/a2">My GitHub</Nav.Link>
-     </Nav.Item>
+     </Nav.Item> 
    </Nav>
 );}
