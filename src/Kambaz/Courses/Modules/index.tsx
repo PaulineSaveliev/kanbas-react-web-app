@@ -1,108 +1,98 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
+import { ListGroup } from "react-bootstrap";
+import ModulesControls from "./ModulesControls";
+import { BsGripVertical } from "react-icons/bs";
+import ModuleControlButtons from "./ModuleControlButtons";
+import LessonControlButtons from "./LessonControlButtons";
+
 export default function Modules() {
     return (
       <div>
-        {/* Implement Collapse All button, View Progress button, etc. */}
-        <button type="button"
-            id="wd-all-good">
-            Collapse All
-            </button>
-        <button type="button"
-            id="wd-all-good">
-            View Progress
-            </button>
-        <select id="wd-select-one-genre">
-            <option selected value="ALL">Publish All</option>
-            <option value="SOME">Publish Some</option>
-            <option value="NONE">Hide All</option>
-        </select>
-        <button type="button"
-            id="wd-all-good">
-            + Module
-        </button>
-        <ul id="wd-modules">
-          <li className="wd-module">
-            <div className="wd-title">Week 1, Intro, Lectures 1+2</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction to the course</li>
-                  <li className="wd-content-item">History of Environmental Action</li>
-                </ul>
-              </li>
-              <li>
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Fundamentals of Environmental Science - ch.1</li>
-                  <li className="wd-content-item">Fundamentals of Environmental Science - ch.2</li>
-                </ul>
-              </li>
-              <li>
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Introduction</li>
-                  <li className="wd-content-item">Ancient ENVR Action</li>
-                  <li className="wd-content-item">Recent History</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li className="wd-module">
-          <div className="wd-title">Week 2, Water, Lectures 3+4</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Water Systems</li>
-                  <li className="wd-content-item">Freshwater Environments</li>
-                  <li className="wd-content-item">Saltwater Environments</li>
-                </ul>
-              </li>
-              <li>
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Fundamentals of Environmental Science - ch.3</li>
-                </ul>
-              </li>
-              <li>
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Water Cycle</li>
-                  <li className="wd-content-item">Freshwater Systems</li>
-                  <li className="wd-content-item">Saltwater Systems</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-          <li className="wd-module">
-          <div className="wd-title">Week 3, Environments 1, Lecture 5</div>
-            <ul className="wd-lessons">
-              <li className="wd-lesson">
-                <span className="wd-title">LEARNING OBJECTIVES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Terrestrial Environments</li>
-                </ul>
-              </li>
-              <li>
-                <span className="wd-title">READING</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Fundamentals of Environmental Science - ch.4</li>
-                  <li className="wd-content-item">Fundamentals of Environmental Science - ch.5</li>
-                </ul>
-                </li>
-              <li>
-                <span className="wd-title">SLIDES</span>
-                <ul className="wd-content">
-                  <li className="wd-content-item">Terrestrial Environments</li>
-                  <li className="wd-content-item">Threats to Terrestrial Environments</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <ModulesControls /><br /><br /><br /><br />
+        <ListGroup className="rounded-0" id="wd-modules">
+          <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
+            <div className="wd-title p-3 ps-2 bg-secondary">
+              <BsGripVertical className="me-2 fs-3" /> Week 1, Intro, Lectures 1+2 <ModuleControlButtons /> 
+            </div>
+            <ListGroup className="wd-lessons rounded-0">
+              <ListGroup.Item className="wd-lesson p-3 ps-1">
+                <BsGripVertical className="me-2 fs-3" /> LEARNING OBJECTIVES 
+                <LessonControlButtons /> </ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" /> Introduction to the course <LessonControlButtons /> </ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />History of Environmental Action <LessonControlButtons /></ListGroup.Item>
+              <ListGroup.Item className="wd-lesson p-3 ps-1">
+                <BsGripVertical className="me-2 fs-3" />READING <LessonControlButtons /></ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />Fundamentals of Environmental Science - ch.1 <LessonControlButtons /></ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />Fundamentals of Environmental Science - ch.2 <LessonControlButtons /></ListGroup.Item>
+              <ListGroup.Item className="wd-lesson p-3 ps-1">
+                <BsGripVertical className="me-2 fs-3" />SLIDES <LessonControlButtons /></ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />Introduction <LessonControlButtons /></ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />Ancient ENVR Action <LessonControlButtons /></ListGroup.Item>
+                  <ListGroup.Item className="wd-lesson p-3 ps-1">
+                    <BsGripVertical className="me-2 fs-3" />Recent History <LessonControlButtons /></ListGroup.Item>
+            </ListGroup>
+          </ListGroup.Item>
+          <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            <BsGripVertical className="me-2 fs-3" /> Week 2, Water, Lectures 3+4 <ModuleControlButtons /> 
+          </div>
+          <ListGroup className="wd-lessons rounded-0">
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" /> LEARNING OBJECTIVES 
+              <LessonControlButtons /> </ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Water Systems <LessonControlButtons /> </ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Freshwater Environments <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Saltwater Environments <LessonControlButtons /></ListGroup.Item>
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />READING <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Fundamentals of Environmental Science - ch.3 <LessonControlButtons /></ListGroup.Item>
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />SLIDES <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Water Cycle <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Freshwater Systems <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Saltwater Systems <LessonControlButtons /></ListGroup.Item>
+          </ListGroup>
+        </ListGroup.Item>
+        <ListGroup.Item className="wd-module p-0 mb-5 fs-5 border-gray">
+          <div className="wd-title p-3 ps-2 bg-secondary">
+            <BsGripVertical className="me-2 fs-3" /> Week 3, Environments 1, Lecture 5 <ModuleControlButtons /> 
+          </div>
+          <ListGroup className="wd-lessons rounded-0">
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" /> LEARNING OBJECTIVES 
+              <LessonControlButtons /> </ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Terrestrial Environments<LessonControlButtons /> </ListGroup.Item>
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />READING <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Fundamentals of Environmental Science - ch.4 <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Fundamentals of Environmental Science - ch.5 <LessonControlButtons /></ListGroup.Item>
+            <ListGroup.Item className="wd-lesson p-3 ps-1">
+              <BsGripVertical className="me-2 fs-3" />SLIDES <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Terrestrial Environments <LessonControlButtons /></ListGroup.Item>
+                <ListGroup.Item className="wd-lesson p-3 ps-1">
+                  <BsGripVertical className="me-2 fs-3" />Threats to Terrestrial Environments <LessonControlButtons /></ListGroup.Item>
+          </ListGroup>
+        </ListGroup.Item>
+        </ListGroup>
       </div>
   );}
   

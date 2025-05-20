@@ -1,0 +1,66 @@
+/* 
+Pauline Saveliev
+CS5610 - Summer 1 2025
+*/
+
+/* main content */
+body   {  margin: 0;  padding: 0;  }
+body * {  font-family: Arial, Helvetica, sans-serif;  }
+
+@media (min-width: 768px) {
+  #wd-kambaz .wd-main-content-offset {
+    padding-left: 140px !important;
+  }
+}
+
+/* Course navigation */
+.list-group.wd > .list-group-item.active {
+  color: black;
+  background-color: white;
+  border-left: 3px solid black !important;
+}
+
+/* Modules */
+.btn-secondary {
+  --bs-btn-color: #000 !important;
+  --bs-btn-bg: #c7cdd1 !important;
+  --bs-btn-border-color: #c7cdd1 !important;
+  --bs-btn-hover-color: #fff !important;
+}
+.bg-secondary {
+  --bs-secondary-rgb: 199, 205, 209;
+}
+.list-group-item {
+  --bs-list-group-border-color: gray;
+}
+.wd-lesson {
+  border-left: 3px solid green !important;
+}
+
+/* Assignments */
+.wd-assignment-head {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+.wd-section-right-actions {
+  float: right;
+}
+.wd-section-percent {
+  border-radius: 20px;
+  border-width: 2px;
+  border-color: gray;
+  border-style: solid;
+  padding: 5px 10px 5px 10px;
+  margin-right: 5px;
+  font-size:large;
+}
+.wd-lessons {
+  font-size: medium;
+}
+.wd-search-box {
+  max-width: 300px;
+}
+.wd-gray-box {
+  color: red;
+}
