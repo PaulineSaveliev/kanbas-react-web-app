@@ -1,7 +1,7 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
-import { Button, Col, Form, FormControl, FormGroup, FormLabel, InputGroup, ListGroup, Row } from "react-bootstrap";
+import { Button, FormControl, FormGroup, InputGroup, ListGroup } from "react-bootstrap";
 import { BsGripVertical } from "react-icons/bs";
 import AssignmentControlButtons from "./AsgnControl";
 import SectionControlButtons from "./SectionControl";

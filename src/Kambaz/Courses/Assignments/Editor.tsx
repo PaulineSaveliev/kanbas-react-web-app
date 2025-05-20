@@ -1,115 +1,127 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
+import { Row, Col, Button, Form, FormSelect } from "react-bootstrap";
+
 export default function AssignmentEditor() {
     return (
       <div id="wd-assignments-editor">
-        <label htmlFor="wd-name" defaultValue="Assignment Name"></label><br />
-        <input id="wd-name" value="A1 - History" /><br /><br />
-        <textarea id="wd-description" cols={30} rows={10}
-            defaultValue="Do questions 1-15 at the back of chapter 1, then questions 4-13 at the back of chapter 2. Write a few paragraphs about the documentary in class and then include a description about yourself. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc."
-        >
-        </textarea>
-        <br /><br />
-        <table>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-points">Points</label>
-            </td>
-            <td>
-              <input id="wd-points" value={100} type="number" />
-            </td>
-          </tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-group">Assignment Group</label>
-            </td>
-            <td>
-                <select id="wd-group">
-                    <option value="ASSIGNMENT">ASSIGNMENTS</option>
-                    <option value="QUIZ">QUIZ</option>
-                    <option selected value="EXAM">EXAMS</option>
-                    <option value="PROJECT">PROJECTS</option>
-                </select>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-display-grade-as">Display Grade as</label>
-            </td>
-            <td>
-                <select id="wd-display-grade-as">
-                    <option value="PERCENTAGE">Percentage</option>
-                    <option value="POINTS">Points</option>
-                </select>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" valign="top">
-              <label htmlFor="wd-submission-type">Submission Type</label>
-            </td>
-            <td>
-                <select id="wd-submission-type">
-                    <option value="ONLINE">Online</option>
-                    <option value="PHYSICAL">Physical</option>
-                    <option value="Presentation">Presentation</option>
-                </select><br /><br />
-                Online Entry Options<br />
-                <input type="checkbox" name="wd-check-text-entry" id="wd-text-entry"/>
-                    <label htmlFor="wd-text-entry">Text Entry</label><br/>
-                <input type="checkbox" name="wd-check-website-url" id="wd-website-url"/>
-                    <label htmlFor="wd-website-url">Website URL</label><br/>
-                <input type="checkbox" name="wd-check-media-recordings" id="wd-media-recordings"/>
-                    <label htmlFor="wd-media-recordings">Media Recordings</label><br/>
-                <input type="checkbox" name="wd-check-student-annotation" id="wd-student-annotation"/>
-                    <label htmlFor="wd-student-annotation">Student Annotation</label><br/>
-                <input type="checkbox" name="wd-check-file-upload" id="wd-file-upload"/>
-                    <label htmlFor="wd-check-file-upload">File Upload</label><br/><br/><br/>
-            </td>
-          </tr>
-          <tr>
-            <td align="right" valign="top">
-              Assign
-            </td>
-            <td>
-                <label htmlFor="wd-assign-to">Assign to</label><br/>
-                <input id="wd-assign-to" defaultValue="Everyone" /><br /><br />
-
-                <label htmlFor="wd-due-date">Due</label><br/>
-                <input type="date"
-                        defaultValue="2025-05-13"
-                        id="wd-due-date"/><br/><br />
-                
-                <table>
-                    <tr>
-                        <td>
-                        <label htmlFor="wd-available-from">Available From</label><br/>
-                        <input type="date"
-                                defaultValue="2025-05-06"
-                                id="wd-available-from"/>
-                        </td>
-                        <td>
-                        <label htmlFor="wd-available-until">Available Until</label><br/>
-                        <input type="date"
-                                defaultValue="2025-05-20"
-                                id="wd-available-until"/><br/>
-                        </td>
-                    </tr>
-                </table>
-
-            </td>
-          </tr>
-        </table>
-        <hr />
-        <table width="100%">
-  <tr>
-    <td align="right">
-      <button>Cancel</button>
-      &nbsp;
-      <button>Submit</button>
-    </td>
-  </tr>
-</table>
+                <Form>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label column xxl={12}> Assignment Name </Form.Label>
+                    <Col sm={11}>
+                    <Form.Control type="email" placeholder="A1" value="A1" />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3" controlId="textarea2">
+                    <Col sm={11}>
+                    <Form.Control as="textarea" style={{height: "200px"}}
+                    value="Do questions 1-15 at the back of chapter 1, then questions 4-13 at the back of chapter 2. Write a few paragraphs about the documentary in class and then include a description about yourself. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc. sample text etc etc etc."
+                    />
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label className="text-end" column sm={3}> Points </Form.Label>
+                    <Col sm={8}>
+                    <Form.Control type="text" placeholder="points..." value="100" />
+                    </Col>
+                </Form.Group>
+                <fieldset>
+                    <Form.Group as={Row} className="mb-3">
+                    <Form.Label className="text-end" as="legend" column sm={3}>
+                        Assignment Group </Form.Label>
+                    <Col sm={8}>
+                        <FormSelect>
+                      <option value="ASSIGNMENTS">Assignments</option>
+                      <option value="QUIZZES">Quizzes</option>
+                      <option value="EXAMS">Exams</option>
+                      <option value="PROJECTS">Projects</option>
+                    </FormSelect>
+                    </Col>
+                    </Form.Group>
+                </fieldset>
+                <fieldset>
+                    <Form.Group as={Row} className="mb-3">
+                    <Form.Label as="legend" column sm={3} className="text-end" >
+                        Display Grade as </Form.Label>
+                    <Col sm={8}>
+                        <FormSelect>
+                          <option value="PERCENTAGE">Percentage</option>
+                          <option value="POINTS">Points</option>
+                        </FormSelect>
+                    </Col>
+                    </Form.Group>
+                </fieldset>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label className="text-end" column sm={3}> Submission Type </Form.Label>
+                    <Col sm={8}>
+                        <div className="wd-gray-box">
+                          <Col>
+                            <FormSelect>
+                              <option value="ONLINE">Online</option>
+                              <option value="PHYSICAL">Physical</option>
+                              <option value="PRESENTATION">Presentation</option>
+                            </FormSelect>
+                            <Form.Group>
+                              <Form.Label column className="wd-assgn-edit-label mb-0">Online Entry Options</Form.Label>
+                              <Form.Check className="wd-assgn-edit-checkbox mt-0" label="Text Entry" />
+                              <Form.Check className="wd-assgn-edit-checkbox" label="Website URL" />
+                              <Form.Check className="wd-assgn-edit-checkbox" label="Media Recording" />
+                              <Form.Check className="wd-assgn-edit-checkbox" label="Student Annotation" />
+                              <Form.Check className="wd-assgn-edit-checkbox" label="File Upload" />
+                            </Form.Group>
+                            
+                          </Col>
+                        </div>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-3">
+                    <Form.Label className="text-end" column sm={3}> Assign </Form.Label>
+                    <Col sm={8}>
+                        <div className="wd-gray-box">
+                          <Col>
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column  className="wd-assgn-edit-label" xxl={12}> Assign To </Form.Label>
+                                <Col sm={11}>
+                                <Form.Control type="email" placeholder="Everyone" value="Everyone" />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} className="mb-3">
+                                <Form.Label column  className="wd-assgn-edit-label" xxl={12}> Due</Form.Label>
+                                <Col sm={11}>
+                                <Form.Control type="email" placeholder="A1" value="A1" />
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} className="mb-3">
+                                <Col sm={5}>
+                                  <Form.Group as={Row} className="mb-3">
+                                      <Form.Label column  className="wd-assgn-edit-label" xxl={12}>Available From</Form.Label>
+                                      <Col sm={11}>
+                                      <Form.Control type="date" placeholder="2025-05-06" value="2025-05-06" />
+                                      </Col>
+                                  </Form.Group>
+                                </Col>
+                                <Col sm={5}>
+                                  <Form.Group as={Row} className="mb-3">
+                                      <Form.Label column  className="wd-assgn-edit-label" xxl={12}>Available Until</Form.Label>
+                                      <Col sm={11}>
+                                      <Form.Control type="date" placeholder="2025-05-06" value="2025-05-08" />
+                                      </Col>
+                                  </Form.Group>
+                                </Col>
+                            </Form.Group>
+                          </Col>
+                        </div>
+                    </Col>
+                </Form.Group>
+                <hr />
+                <Form.Group className="mb-3">
+                  <Col sm={11} className="d-flex justify-content-end">
+                    <Button variant="secondary" className="me-2">Cancel</Button>
+                    <Button variant="danger">Submit</Button>
+                  </Col>
+                </Form.Group>
+            </Form>
       </div>
   );}
   
