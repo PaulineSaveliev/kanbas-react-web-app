@@ -89,7 +89,7 @@ export default function AssignmentEditor() {
                             <Form.Group as={Row} className="mb-3">
                                 <Form.Label column  className="wd-assgn-edit-label" xxl={12}> Due</Form.Label>
                                 <Col sm={11}>
-                                <Form.Control type="email" placeholder="A1" value="A1" />
+                                <Form.Control type="date" placeholder="2025-05-06" value="2025-05-06" />
                                 </Col>
                             </Form.Group>
                             <Form.Group as={Row} className="mb-3">
