@@ -35,6 +35,7 @@ import Highlight from "./Highlight"
 import PathParameters from "./PathParameters"
 
 export default function Lab3() {
+    console.log("Hello World!")
     return (
         <div>
             <h2>Lab 3</h2>
