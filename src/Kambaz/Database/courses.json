@@ -41,13 +41,13 @@
   },
   {
     "_id": "RS105",
-    "name": "Inorganic Chemistry",
+    "name": "Intro to Marvel Comics",
     "number": "CH1240",
     "startDate": "2023-01-10",
     "endDate": "2023-05-15",
     "department": "D134",
     "credits": 3,
-    "description": "Inorganic Chemistry focuses on the properties, structures, and behaviors of inorganic and organometallic compounds. This course covers a range of topics including coordination chemistry, metal complexes, bonding theories, symmetry, and crystal field theory. Students will also explore the role of inorganic chemistry in real-world applications such as catalysis, materials science, and bioinorganic processes. Laboratory work emphasizes synthesis and analysis of inorganic compounds, fostering a deeper understanding of theoretical concepts."
+    "description": "Introduction to Marvel Comics focuses on the impact of Marvel Comics on popular culture and examines recent events in the comics, with a particular focus on cosmic heroes."
   },
   {
     "_id": "RS106",

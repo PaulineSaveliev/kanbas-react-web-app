@@ -7,7 +7,6 @@ import { courses } from "../Database"
 
 export default function CourseNavigation() {
   const { cid } = useParams();
-  console.log("found cid, its" + cid)
   const course = courses.find((course) => course._id === cid);
   const { pathname } = useLocation();
    const links = [
