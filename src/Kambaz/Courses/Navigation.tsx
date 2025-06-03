@@ -3,11 +3,10 @@
 
 import { ListGroup } from "react-bootstrap";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { courses } from "../Database"
 
-export default function CourseNavigation() {
+export default function CourseNavigation({courses}: {courses: any}) {
   const { cid } = useParams();
-  const course = courses.find((course) => course._id === cid);
+  const course = courses.find((course: any) => course._id === cid);
   const { pathname } = useLocation();
    const links = [
       {label: "Home", path: "Home"},
