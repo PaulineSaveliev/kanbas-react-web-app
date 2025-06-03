@@ -3,27 +3,26 @@
 
 import { Button, Card, Col, FormControl, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import * as db from "../Database";
 import ProtectedEdit from '../Courses/protectedEdit';
+import { addCourse, deleteCourse, updateCourse, editCourse } from '../Courses/reducer';
+import { useState } from 'react';
 
-export default function Dashboard(
-  { courses, course, setCourse, addNewCourse, 
-    deleteCourse, updateCourse}: {
-      courses: any[]; course: any; setCourse: (course: any) => void;
-      addNewCourse: () => void; deleteCourse: (course: any) => void;
-      updateCourse: () => void;
-    }
-) {
+export default function Dashboard() {
+  
+    const {courses} = useSelector((state: any) => state.courseReducer)
     const {currentUser} = useSelector((state: any) => state.accountReducer);
     const {enrollments} = db;
     const activeCourses = courses
-              .filter((course) =>
+              .filter((course: any) =>
                 enrollments.some(
                   (enrollment) =>
                     enrollment.user === currentUser._id &&
                     enrollment.course === course._id
                 ));
+    const [course, setCourse] = useState({name: "New Name", description: "New Description", number: "New Number", startDate: "2000-01-01", endDate: "2000-01-01"})
+    const dispatch = useDispatch();
     return (
       <div id="wd-dashboard">
         <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -31,10 +30,10 @@ export default function Dashboard(
         <h5>New Course
           <button className="btn btn-primary float-end align-center"
                   id="wd-add-new-course-click"
-                  onClick={addNewCourse}>Add</button>
+                  onClick={() => dispatch(addCourse(course))}>Add</button>
           <button className="btn btn-warning me-2 float-end align-center"
                   id="wd-update-course-click"
-                  onClick={updateCourse}>Update</button>
+                  onClick={() => dispatch(updateCourse(course))}>Update</button>
         </h5><br />
         <FormControl value={course.name} className="mb-2" onChange={(e) => setCourse({...course, name: e.target.value})} />
         <FormControl value={course.description} className="mb-3" onChange={(e) => setCourse({...course, description: e.target.value})} />
@@ -46,7 +45,7 @@ export default function Dashboard(
         <div id="wd-dashboard-courses">
           <Row xs={1} md={5} className="g-4">
             {activeCourses
-              .map((course) => (
+              .map((course: any) => (
               <Col className="wd-dashboard-course" style={{ width: "300px" }}>
                 <Card>
                 <Link to={`/Kambaz/Courses/${course._id}/Home`}
@@ -60,7 +59,7 @@ export default function Dashboard(
                     <ProtectedEdit>
                     <Button onClick={(event) => {
                       event.preventDefault();
-                      deleteCourse(course._id);
+                      dispatch(deleteCourse(course._id));
                     }} className="btn btn-danger float-end" id="wd-delete-course-click">Delete</Button>
                     <Button onClick={(event) => {
                       event.preventDefault();
