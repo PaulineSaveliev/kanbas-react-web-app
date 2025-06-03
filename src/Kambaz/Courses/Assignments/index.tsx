@@ -8,15 +8,24 @@ import SectionControlButtons from "./SectionControl";
 import { FiEdit } from "react-icons/fi";
 import "../../styles.css"
 import { FaPlus, FaSearch } from "react-icons/fa";
-import * as db from "../../Database";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProtectedEdit from "../protectedEdit";
 import ProtectedAssgnEdit from "./ProtectedAssgnEdit";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAssignment } from "./reducer"
 
 export default function Assignments() {
     const {cid} = useParams();
     const { pathname } = useLocation();
-    const assignments = db.assignments.filter((assgn: any) => cid && assgn.course === cid);
+    const {assignments} = useSelector((state: any) => state.assignmentReducer)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const activeAssignments = assignments.filter((assgn: any) => cid && assgn.course === cid);
+    console.log(assignments);
+
+    const formatDate = (date: Date) => {
+        return date.toString().slice(0, 10);
+    }
     return (
         <div id="wd-course-assignments">
             <FormGroup className="mb-3 d-flex justify-content-between align-items-center" controlId="wd-email">
@@ -30,7 +39,10 @@ export default function Assignments() {
                         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                         <span>Group</span>
                     </Button>
-                    <Button variant="danger" className="d-flex align-items-center" id="wd-add-module-btn">
+                    <Button onClick={() => {
+                        navigate(`${pathname}/newAssgn`);
+                    }}
+                    variant="danger" className="d-flex align-items-center" id="wd-add-module-btn">
                         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
                         <span>Assignment</span>
                     </Button>
@@ -51,7 +63,7 @@ export default function Assignments() {
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
-                        {assignments
+                        {activeAssignments
                             .filter((assgn: any) => assgn.group === "ASSIGNMENTS")
                             .map((assgn: any) => (
                                 <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
@@ -65,8 +77,8 @@ export default function Assignments() {
                                                 {assgn.title}
                                             </a><br />
                                             <span className="text-danger me-2">Multiple Modules</span>
-                                            |<b> Not available until</b> {assgn.availableOn} at 12:00am |<br />
-                                            <b>Due</b> {assgn.dueDate} at 12:00am<br />
+                                            |<b> Not available until</b> {formatDate(assgn.availableOn)} at 12:00am |<br />
+                                            <b>Due</b> {formatDate(assgn.dueDate)} at 12:00am<br />
                                         </div>
                                     </div>
                                     <ProtectedEdit>
@@ -92,7 +104,7 @@ export default function Assignments() {
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
-                        {assignments
+                        {activeAssignments
                             .filter((assgn: any) => assgn.group === "QUIZZES")
                             .map((assgn: any) => (
                                 <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
@@ -133,7 +145,7 @@ export default function Assignments() {
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
-                        {assignments
+                        {activeAssignments
                             .filter((assgn: any) => assgn.group === "PROJECTS")
                             .map((assgn: any) => (
                                 <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
@@ -174,7 +186,7 @@ export default function Assignments() {
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
-                        {assignments
+                        {activeAssignments
                             .filter((assgn: any) => assgn.group === "EXAMS")
                             .map((assgn: any) => (
                                 <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>

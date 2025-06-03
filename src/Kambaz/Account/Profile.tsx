@@ -1,8 +1,8 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
-import { Button, Form, FormControl, FormSelect } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Button, FormControl } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setCurrentUser } from "./reducer";
@@ -13,7 +13,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const { currentUser } = useSelector((state: any) => state.accountReducer);
   const fetchProfile = () => {
-    if (!currentUser) return navigate("Kambaz/Account/Signin");
+    if (!currentUser) return navigate("/Kambaz/Account/Signin");
     setProfile(currentUser);
   }
   const signout = () => {
