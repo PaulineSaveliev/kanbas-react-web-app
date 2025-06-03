@@ -12,7 +12,7 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProtectedEdit from "../protectedEdit";
 import ProtectedAssgnEdit from "./ProtectedAssgnEdit";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer"
+import { deleteAssignment } from "./reducer";
 
 export default function Assignments() {
     const {cid} = useParams();
@@ -83,7 +83,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -124,7 +124,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -165,7 +165,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -206,7 +206,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
