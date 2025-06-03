@@ -1,28 +1,55 @@
 // Pauline Saveliev
 // CS5610 - Summer 1 2025
 
-import { Button, Form, FormSelect } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Button, Form, FormControl, FormSelect } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setCurrentUser } from "./reducer";
+
 export default function Profile() {
+  const [profile, setProfile] = useState<any>({});
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { currentUser } = useSelector((state: any) => state.accountReducer);
+  const fetchProfile = () => {
+    if (!currentUser) return navigate("Kambaz/Account/Signin");
+    setProfile(currentUser);
+  }
+  const signout = () => {
+    dispatch(setCurrentUser(null));
+    navigate("/Kambaz/Account/Signin");
+  };
+  useEffect(() => { fetchProfile(); }, []);
+
   return (
     <div id="wd-profile-screen">
       <h3>Profile</h3>
-      <Form>
-          <Form.Control className="wd-signin-input" type="text" placeholder="username" defaultValue="user12345" />
-          <Form.Control className="wd-signin-input" type="password" placeholder="password" defaultValue="password123"/>
-          <Form.Control className="wd-signin-input" type="text" placeholder="first name" defaultValue="Richard" />
-          <Form.Control className="wd-signin-input" type="text" placeholder="last name" defaultValue="Rider"/>
-          <Form.Control  className="wd-signin-input" type="date" placeholder="mm/dd/yyyy" defaultValue="2025-05-06" />
-          <Form.Control className="wd-signin-input" type="email" placeholder="email" defaultValue="rider.r@northeastern.edu"/>
-          <FormSelect id="wd-user-status" className="wd-signin-input">
+      {profile && (
+        <div>
+          <FormControl defaultValue={profile.username} id="wd-username" className="mb-2"
+              onChange={(e) => setProfile({ ...profile, username: e.target.value })}/>
+          <FormControl defaultValue={profile.password} id="wd-password" className="mb-2"
+              onChange={(e) => setProfile({ ...profile, password: e.target.value })}/>
+          <FormControl defaultValue={profile.firstName} id="wd-firstname" className="mb-2"
+              onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}/>
+          <FormControl defaultValue={profile.lastName} id="wd-lastname" className="mb-2"
+              onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}/>
+          <FormControl defaultValue={profile.dob} id="wd-dob" className="mb-2"
+              onChange={(e) => setProfile({ ...profile, dob: e.target.value })} type="date" />
+          <FormControl defaultValue={profile.email} id="wd-email" className="mb-2"
+              onChange={ (e) => setProfile({ ...profile, email: e.target.value })}/>
+
+          <select onChange={(e) => setProfile({ ...profile, role: e.target.value })}
+              className="form-control mb-2" id="wd-role">
+            <option value="USER">User</option>
+            <option value="ADMIN">Admin</option>
             <option value="FACULTY">Faculty</option>
             <option value="STUDENT">Student</option>
-          </FormSelect>
-          <Link to="/Kambaz/Account/Signin" id="wd-signout-btn">
-            <Button className="wd-signin-input" variant="danger">
-              Sign Out
-            </Button>
-          </Link>
-      </Form>
-    </div>
+          </select>
+          <Button onClick={signout} className="w-100 mb-2" id="wd-signout-btn">
+            Sign out
+          </Button>
+        </div>
+    )}</div>
 );}

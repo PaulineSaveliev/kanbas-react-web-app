@@ -10,6 +10,7 @@ import { useParams } from "react-router";
 import { useState } from "react";
 import { addModule, editModule, updateModule, deleteModule } from "./reducer"
 import {useSelector, useDispatch} from "react-redux";
+import ProtectedEdit from "../protectedEdit";
 
 export default function Modules() {
   const {cid} = useParams();
@@ -18,12 +19,14 @@ export default function Modules() {
   const dispatch = useDispatch();
     return (
       <div>
+        <ProtectedEdit>
         <ModulesControls setModuleName={setModuleName} moduleName={moduleName} 
           addModule={() => {
             dispatch(addModule({name: moduleName, course: cid}));
             setModuleName("")
           }}
-        /><br /><br /><br /><br />
+        />
+        <br /><br /><br /><br /></ProtectedEdit>
         <ListGroup className="rounded-0" id="wd-modules">
           {modules
             .filter((module: any) => module.course === cid)
@@ -40,9 +43,11 @@ export default function Modules() {
                       }
                       }} defaultValue={module.name}/>
                   )}
-                  <ModuleControlButtons moduleId={module._id} 
-                    deleteModule={(moduleId) => {dispatch(deleteModule(moduleId))}} 
-                    editModule={(moduleId) => {dispatch(editModule(moduleId))}}/>
+                  <ProtectedEdit>
+                    <ModuleControlButtons moduleId={module._id} 
+                      deleteModule={(moduleId) => {dispatch(deleteModule(moduleId))}} 
+                      editModule={(moduleId) => {dispatch(editModule(moduleId))}}/>
+                  </ProtectedEdit>
                 </div>
                 {module.lessons && (
                   <ListGroup className = "wd-lessons rounded-0">
@@ -50,7 +55,9 @@ export default function Modules() {
                       <ListGroup.Item className="wd-lesson p-3 ps-1">
                         <BsGripVertical className="me-2 fs-3" />
                         {lesson.name}
-                        <LessonControlButtons />
+                        <ProtectedEdit>
+                         <LessonControlButtons />
+                        </ProtectedEdit>
                       </ListGroup.Item>
                     ))}
                   </ListGroup>

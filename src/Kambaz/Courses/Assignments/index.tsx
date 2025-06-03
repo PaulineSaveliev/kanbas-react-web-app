@@ -10,6 +10,8 @@ import "../../styles.css"
 import { FaPlus, FaSearch } from "react-icons/fa";
 import * as db from "../../Database";
 import { Link, useLocation, useParams } from "react-router-dom";
+import ProtectedEdit from "../protectedEdit";
+import ProtectedAssgnEdit from "./ProtectedAssgnEdit";
 
 export default function Assignments() {
     const {cid} = useParams();
@@ -22,6 +24,7 @@ export default function Assignments() {
                     <InputGroup.Text> <FaSearch /> </InputGroup.Text>
                     <FormControl type="text" placeholder="Search..."/>
                 </InputGroup>
+                <ProtectedEdit>
                 <div className="d-flex">
                     <Button variant="secondary" className="d-flex align-items-center me-2" id="wd-add-group-btn">
                         <FaPlus className="position-relative me-2" style={{ bottom: "1px" }} />
@@ -32,6 +35,7 @@ export default function Assignments() {
                         <span>Assignment</span>
                     </Button>
                 </div>
+                </ProtectedEdit>
             </FormGroup>
 
             <ListGroup className="rounded-0" id="wd-modules">
@@ -41,19 +45,21 @@ export default function Assignments() {
                     <span className="wd-assignment-head">ASSIGNMENTS</span>
                     <div className="wd-section-right-actions">
                         <span className="wd-section-percent wd-border-thin me-2">40% of total</span>
+                        <ProtectedEdit>
                         <SectionControlButtons />
+                        </ProtectedEdit>
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         {assignments
                             .filter((assgn: any) => assgn.group === "ASSIGNMENTS")
                             .map((assgn: any) => (
-                                <ListGroup.Item className="wd-lesson p-3 ps-1 d-flex justify-content-between align-items-center"
-                                    as={Link} to={`${pathname}/${assgn._id}`}
-                                >
+                                <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
                                     <div className="d-flex align-items-center">
                                         <BsGripVertical className="me-2 fs-3" />
+                                        <ProtectedEdit>
                                         <FiEdit style={{ top: "2px" }} className="text-success me-3" />
+                                        </ProtectedEdit>
                                         <div>
                                             <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-head">
                                                 {assgn.title}
@@ -63,10 +69,12 @@ export default function Assignments() {
                                             <b>Due</b> {assgn.dueDate} at 12:00am<br />
                                         </div>
                                     </div>
+                                    <ProtectedEdit>
                                     <div className="ms-3">
                                         <AssignmentControlButtons />
                                     </div>
-                                </ListGroup.Item>
+                                    </ProtectedEdit>
+                                </ProtectedAssgnEdit>
                             ))}
                     </ListGroup>
                 </ListGroup.Item>
@@ -78,19 +86,21 @@ export default function Assignments() {
                     <span className="wd-assignment-head">QUIZZES</span>
                     <div className="wd-section-right-actions">
                         <span className="wd-section-percent wd-border-thin me-2">20% of total</span>
+                        <ProtectedEdit>
                         <SectionControlButtons />
+                        </ProtectedEdit>
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         {assignments
                             .filter((assgn: any) => assgn.group === "QUIZZES")
                             .map((assgn: any) => (
-                                <ListGroup.Item className="wd-lesson p-3 ps-1 d-flex justify-content-between align-items-center"
-                                    as={Link} to={`${pathname}/${assgn._id}`}
-                                >
+                                <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
                                     <div className="d-flex align-items-center">
                                         <BsGripVertical className="me-2 fs-3" />
+                                        <ProtectedEdit>
                                         <FiEdit style={{ top: "2px" }} className="text-success me-3" />
+                                        </ProtectedEdit>
                                         <div>
                                             <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-head">
                                                 {assgn.title}
@@ -100,10 +110,12 @@ export default function Assignments() {
                                             <b>Due</b> {assgn.dueDate} at 12:00am<br />
                                         </div>
                                     </div>
+                                    <ProtectedEdit>
                                     <div className="ms-3">
                                         <AssignmentControlButtons />
                                     </div>
-                                </ListGroup.Item>
+                                    </ProtectedEdit>
+                                </ProtectedAssgnEdit>
                             ))}
                     </ListGroup>
                 </ListGroup.Item>
@@ -115,19 +127,21 @@ export default function Assignments() {
                     <span className="wd-assignment-head">PROJECTS</span>
                     <div className="wd-section-right-actions">
                         <span className="wd-section-percent wd-border-thin me-2">30% of total</span>
+                        <ProtectedEdit>
                         <SectionControlButtons />
+                        </ProtectedEdit>
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         {assignments
                             .filter((assgn: any) => assgn.group === "PROJECTS")
                             .map((assgn: any) => (
-                                <ListGroup.Item className="wd-lesson p-3 ps-1 d-flex justify-content-between align-items-center"
-                                    as={Link} to={`${pathname}/${assgn._id}`}
-                                >
+                                <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
                                     <div className="d-flex align-items-center">
                                         <BsGripVertical className="me-2 fs-3" />
+                                        <ProtectedEdit>
                                         <FiEdit style={{ top: "2px" }} className="text-success me-3" />
+                                        </ProtectedEdit>
                                         <div>
                                             <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-head">
                                                 {assgn.title}
@@ -137,10 +151,12 @@ export default function Assignments() {
                                             <b>Due</b> {assgn.dueDate} at 12:00am<br />
                                         </div>
                                     </div>
+                                    <ProtectedEdit>
                                     <div className="ms-3">
                                         <AssignmentControlButtons />
                                     </div>
-                                </ListGroup.Item>
+                                    </ProtectedEdit>
+                                </ProtectedAssgnEdit>
                             ))}
                     </ListGroup>
                 </ListGroup.Item>
@@ -152,19 +168,21 @@ export default function Assignments() {
                     <span className="wd-assignment-head">EXAMS</span>
                     <div className="wd-section-right-actions">
                         <span className="wd-section-percent wd-border-thin me-2">10% of total</span>
+                        <ProtectedEdit>
                         <SectionControlButtons />
+                        </ProtectedEdit>
                         </div>
                     </div>
                     <ListGroup className="wd-lessons rounded-0">
                         {assignments
                             .filter((assgn: any) => assgn.group === "EXAMS")
                             .map((assgn: any) => (
-                                <ListGroup.Item className="wd-lesson p-3 ps-1 d-flex justify-content-between align-items-center"
-                                    as={Link} to={`${pathname}/${assgn._id}`}
-                                >
+                                <ProtectedAssgnEdit to={`${pathname}/${assgn._id}`}>
                                     <div className="d-flex align-items-center">
                                         <BsGripVertical className="me-2 fs-3" />
+                                        <ProtectedEdit>
                                         <FiEdit style={{ top: "2px" }} className="text-success me-3" />
+                                        </ProtectedEdit>
                                         <div>
                                             <a href="#/Kambaz/Courses/1234/Assignments/123" className="wd-assignment-head">
                                                 {assgn.title}
@@ -174,10 +192,12 @@ export default function Assignments() {
                                             <b>Due</b> {assgn.dueDate} at 12:00am<br />
                                         </div>
                                     </div>
+                                    <ProtectedEdit>
                                     <div className="ms-3">
                                         <AssignmentControlButtons />
                                     </div>
-                                </ListGroup.Item>
+                                    </ProtectedEdit>
+                                </ProtectedAssgnEdit>
                             ))}
                     </ListGroup>
                 </ListGroup.Item>
