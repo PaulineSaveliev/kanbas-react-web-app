@@ -63,7 +63,7 @@ export default function Dashboard() {
                 );
                 return (
                 
-              <Col className="wd-dashboard-course" style={{ width: "350px" }}>
+              <Col className="wd-dashboard-course" style={{ width: "350px" }} id={`key-val-${course._id}`}>
                 <Card>
                 <ProtectCourseAccess courseId={course._id}>
                   <Card.Img variant="top" src={`/images/${course.image}.jpg`} width="100%" height={160}/>
