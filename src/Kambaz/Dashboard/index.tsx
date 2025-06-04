@@ -2,10 +2,9 @@
 // CS5610 - Summer 1 2025
 
 import { Button, Card, Col, FormControl, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import ProtectedEdit from '../Courses/protectedEdit';
-import { addCourse, deleteCourse, updateCourse, editCourse } from '../Courses/reducer';
+import { addCourse, deleteCourse, updateCourse } from '../Courses/reducer';
 import { useState } from 'react';
 import { addEnrollment, deleteEnrollment } from './enrReducer';
 import ProtectCourseAccess from './protectCourseAccess';
