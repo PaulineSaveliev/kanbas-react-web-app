@@ -13,7 +13,7 @@ export default function DateStateVariabe() {
     };
     return (
         <div id="wd-date-state-variables">
-            <h2>Date String Variables</h2>
+            <h2>Date State Variables</h2>
             <h3>{JSON.stringify(startDate)}</h3>
             <h3>{dateObjectToHtmlDateString(startDate)}</h3>
             <FormControl
