@@ -4,25 +4,29 @@
 import { Button, Card, Col, FormControl, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import * as db from "../Database";
 import ProtectedEdit from '../Courses/protectedEdit';
 import { addCourse, deleteCourse, updateCourse, editCourse } from '../Courses/reducer';
 import { useState } from 'react';
+import { addEnrollment, deleteEnrollment } from './enrReducer';
+import ProtectCourseAccess from './protectCourseAccess';
 
 export default function Dashboard() {
   
     const {courses} = useSelector((state: any) => state.courseReducer)
     const {currentUser} = useSelector((state: any) => state.accountReducer);
-    const {enrollments} = db;
-    const activeCourses = courses
+    const {enrollments} = useSelector((state: any) => state.enrollmentReducer);
+    const [enrollVis, setEnrollVis] = useState(currentUser.role !== "FACULTY")
+    const userEnrolled = courses
               .filter((course: any) =>
                 enrollments.some(
-                  (enrollment) =>
+                  (enrollment: any) => 
                     enrollment.user === currentUser._id &&
                     enrollment.course === course._id
                 ));
+    const activeCourses = enrollVis ? userEnrolled : courses;
     const [course, setCourse] = useState({name: "New Name", description: "New Description", number: "New Number", startDate: "2000-01-01", endDate: "2000-01-01"})
     const dispatch = useDispatch();
+    
     return (
       <div id="wd-dashboard">
         <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -41,22 +45,46 @@ export default function Dashboard() {
         <FormControl type="date" value={course.startDate} className="mb-2" onChange={(e) => setCourse({...course, startDate: e.target.value})} />
         <FormControl type="date" value={course.endDate} className="mb-2" onChange={(e) => setCourse({...course, endDate: e.target.value})} />
         </ProtectedEdit>
-        <h2 id="wd-dashboard-published">Published Courses ({activeCourses.length})</h2> <hr />
+        <div className="d-flex justify-content-between mt-3">
+        <h2 id="wd-dashboard-published">Published Courses ({activeCourses.length})</h2> 
+        <Button variant="primary"
+                  id="wd-update-course-click"
+                  onClick={() => {
+                    setEnrollVis(!enrollVis)
+                    }}>{enrollVis ?  `Show Unenrolled (${courses.length})` : "Hide Unenrolled"}</Button>
+        </div>
+        <hr />
         <div id="wd-dashboard-courses">
           <Row xs={1} md={5} className="g-4">
             {activeCourses
-              .map((course: any) => (
-              <Col className="wd-dashboard-course" style={{ width: "300px" }}>
+              .map((course: any) => {
+                const courseEnr = enrollments.find(
+                  (enr: any) => enr.user === currentUser._id && enr.course === course._id
+                );
+                return (
+                
+              <Col className="wd-dashboard-course" style={{ width: "350px" }}>
                 <Card>
-                <Link to={`/Kambaz/Courses/${course._id}/Home`}
-                      className="wd-dashboard-course-link text-decoration-none text-dark">
+                <ProtectCourseAccess courseId={course._id}>
                   <Card.Img variant="top" src={`/images/${course.image}.jpg`} width="100%" height={160}/>
                   <Card.Body>
                     <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">{course.name}</Card.Title>
                     <Card.Text  className="wd-dashboard-course-description overflow-hidden" style={{ height: "100px" }}>
                       {course.description}</Card.Text>
+                      <div className="d-flex justify-content-between">
                     <Button variant="primary">Go</Button>
-                    <ProtectedEdit>
+                    {courseEnr ? 
+                        <Button variant="danger"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              dispatch(deleteEnrollment(courseEnr._id))}}
+                            >Unenroll</Button> : 
+                        <Button variant="success"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            dispatch(addEnrollment({user: currentUser._id, course: course._id}))}}
+                          >Enroll</Button>}
+                          <ProtectedEdit>
                     <Button onClick={(event) => {
                       event.preventDefault();
                       dispatch(deleteCourse(course._id));
@@ -66,11 +94,12 @@ export default function Dashboard() {
                       setCourse(course);
                     }} className="btn btn-warning me-2 float-end" id="wd-edit-course-click">Edit</Button>
                     </ProtectedEdit>
+                    </div>
                   </Card.Body>
-                </Link>
+                </ProtectCourseAccess>
                 </Card>
               </Col>
-            ))}
+            )})}
           </Row>
         </div>
         </div>

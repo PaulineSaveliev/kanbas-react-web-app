@@ -15,9 +15,9 @@ const coursesSlice = createSlice({
             const newCourse: any = {
                 ...course,
                 _id: uuidv4(),
+                image: "courseImg"
             };
             state.courses = [...state.courses, newCourse] as any;
-            console.log(state.courses)
         },
         deleteCourse: (state, { payload: courseId }) => {
             state.courses = state.courses.filter(
