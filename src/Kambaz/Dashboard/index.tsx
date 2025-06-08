@@ -86,7 +86,7 @@ export default function Dashboard() {
                   id="wd-update-course-click"
                   onClick={() => {
                     setEnrollVis(!enrollVis)
-                    }}>{enrollVis ?  `Show Unenrolled (${courses.length})` : "Hide Unenrolled"}</Button>
+                    }}>{enrollVis ?  `Show Unenrolled` : "Hide Unenrolled"}</Button>
         </div>
         <hr />
         <div id="wd-dashboard-courses">
