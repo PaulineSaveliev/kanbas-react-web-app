@@ -5,27 +5,49 @@ import { Button, Card, Col, FormControl, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux"
 import ProtectedEdit from '../Courses/protectedEdit';
 import { addCourse, deleteCourse, updateCourse } from '../Courses/reducer';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addEnrollment, deleteEnrollment } from './enrReducer';
 import ProtectCourseAccess from './protectCourseAccess';
+import * as userClient from "../Account/client";
+import * as courseClient from "../Courses/client"
+
 
 export default function Dashboard() {
-  
-    const {courses} = useSelector((state: any) => state.courseReducer)
+    //const {courses} = useSelector((state: any) => state.courseReducer)
+    const [courses, setCourses] = useState<any[]>([]);
     const {currentUser} = useSelector((state: any) => state.accountReducer);
     const {enrollments} = useSelector((state: any) => state.enrollmentReducer);
     const [enrollVis, setEnrollVis] = useState(currentUser.role !== "FACULTY")
-    const userEnrolled = courses
-              .filter((course: any) =>
-                enrollments.some(
-                  (enrollment: any) => 
-                    enrollment.user === currentUser._id &&
-                    enrollment.course === course._id
-                ));
+    const userEnrolled = courses;
     const activeCourses = enrollVis ? userEnrolled : courses;
-    const [course, setCourse] = useState({name: "New Name", description: "New Description", number: "New Number", startDate: "2000-01-01", endDate: "2000-01-01"})
+    const [course, setCourse] = useState({name: "New Name", description: "New Description", number: "New Number", startDate: "2000-01-01", endDate: "2000-01-01", image: "courseImg", _id: 9000})
     const dispatch = useDispatch();
-    
+    const fetchCourses = async () => {
+      try {
+          const courses2 = await userClient.findMyCourses(currentUser);
+          setCourses(courses2);
+      } catch (error) {
+          console.error(error);
+      }
+    };
+    const addNewCourse = async () => {
+      const newCourse = await userClient.createCourse(course, currentUser._id);
+      setCourses([...courses, newCourse]);
+    }
+    const deleteCourse = async (courseId: string) => {
+      const status = await courseClient.deleteCourse(courseId);
+      setCourses(courses.filter((course) => course._id !== courseId));
+    }
+    const updateCourse = async () => {
+      await courseClient.updateCourse(course);
+      setCourses(courses.map((c) => {
+        if(c._id === course._id) {return course;}
+        else { return c }
+      }))
+    }
+    useEffect(() => {
+        fetchCourses(); 
+    }, [currentUser]);
     return (
       <div id="wd-dashboard">
         <h1 id="wd-dashboard-title">Dashboard</h1> <hr />
@@ -33,10 +55,10 @@ export default function Dashboard() {
         <h5>New Course
           <button className="btn btn-primary float-end align-center"
                   id="wd-add-new-course-click"
-                  onClick={() => dispatch(addCourse(course))}>Add</button>
+                  onClick={() => addNewCourse()}>Add</button>
           <button className="btn btn-warning me-2 float-end align-center"
                   id="wd-update-course-click"
-                  onClick={() => dispatch(updateCourse(course))}>Update</button>
+                  onClick={() => updateCourse()}>Update</button>
         </h5><br />
         <FormControl value={course.name} className="mb-2" onChange={(e) => setCourse({...course, name: e.target.value})} />
         <FormControl value={course.description} className="mb-3" onChange={(e) => setCourse({...course, description: e.target.value})} />
@@ -86,7 +108,7 @@ export default function Dashboard() {
                           <ProtectedEdit>
                     <Button onClick={(event) => {
                       event.preventDefault();
-                      dispatch(deleteCourse(course._id));
+                      deleteCourse(course._id);
                     }} className="btn btn-danger float-end" id="wd-delete-course-click">Delete</Button>
                     <Button onClick={(event) => {
                       event.preventDefault();

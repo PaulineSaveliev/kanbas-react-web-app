@@ -28,3 +28,14 @@ export const profile = async () => {
     const response = await axiosWithCredentials.post(`${USERS_API}/profile`);
     return response.data;
 }
+
+export const findMyCourses = async (user: any) => {
+    const { data } = await axiosWithCredentials.get(`${USERS_API}/${user._id}/courses`)
+    console.log("data:", data);
+    return data;
+}
+
+export const createCourse = async (course:any, userId: any) => {
+    const { data } = await axiosWithCredentials.post(`${USERS_API}/${userId}/courses`, course);
+    return data;
+}
