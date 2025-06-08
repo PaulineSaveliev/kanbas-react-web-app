@@ -12,7 +12,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import ProtectedEdit from "../protectedEdit";
 import ProtectedAssgnEdit from "./ProtectedAssgnEdit";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAssignment } from "./reducer";
+import { deleteAssignment, setAssignments } from "./reducer";
+import * as coursesClient from "../client";
+import * as assignmentsClient from "./client";
+import { useEffect } from "react";
 
 export default function Assignments() {
     const {cid} = useParams();
@@ -21,11 +24,20 @@ export default function Assignments() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const activeAssignments = assignments.filter((assgn: any) => cid && assgn.course === cid);
-    console.log(assignments);
-
     const formatDate = (date: Date) => {
         return date.toString().slice(0, 10);
     }
+    const fetchAssignments = async () => {
+        const assignments = await coursesClient.findAssignmentsForCourse(cid as string);
+        dispatch(setAssignments(assignments));
+    };
+    const removeAssignment = async (assignmentId: string) => {
+        await assignmentsClient.deleteAssignment(assignmentId);
+        dispatch(deleteAssignment(assignmentId));
+      }
+    useEffect(() => {
+        fetchAssignments();
+    }, [])
     return (
         <div id="wd-course-assignments">
             <FormGroup className="mb-3 d-flex justify-content-between align-items-center" controlId="wd-email">
@@ -83,7 +95,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => removeAssignment(assgnId)} />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -124,7 +136,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => removeAssignment(assgnId)}  />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -165,7 +177,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => removeAssignment(assgnId)}  />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>
@@ -206,7 +218,7 @@ export default function Assignments() {
                                     </div>
                                     <ProtectedEdit>
                                     <div className="ms-3">
-                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => {dispatch(deleteAssignment(assgnId))}} />
+                                        <AssignmentControlButtons assgnId={assgn._id} deleteAssgn={(assgnId) => removeAssignment(assgnId)}  />
                                     </div>
                                     </ProtectedEdit>
                                 </ProtectedAssgnEdit>

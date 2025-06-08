@@ -31,7 +31,6 @@ export const profile = async () => {
 
 export const findMyCourses = async (user: any) => {
     const { data } = await axiosWithCredentials.get(`${USERS_API}/${user._id}/courses`)
-    console.log("data:", data);
     return data;
 }
 
