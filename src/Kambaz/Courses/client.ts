@@ -5,6 +5,7 @@ import axios from "axios";
 const axiosWithCredentials = axios.create({withCredentials: true});
 const REMOTE_SERVER = import.meta.env.VITE_REMOTE_SERVER;
 const COURSES_API = `${REMOTE_SERVER}/api/courses`;
+const ENROLLMENT_API = `${REMOTE_SERVER}/api/enrollments`;
 
 export const fetchAllCourses = async () => {
     const { data } = await axiosWithCredentials.get(COURSES_API);
@@ -37,6 +38,19 @@ export const createAssignmentForCourse = async (courseId: string, assignment: an
     const response = await axiosWithCredentials.post(
         `${COURSES_API}/${courseId}/assignments`,
         assignment
+    )
+    return response.data;
+}
+export const createEnrollment = async (courseId: string, userId: string) => {
+    const response = await axiosWithCredentials.post(
+        `${ENROLLMENT_API}/${userId}/${courseId}`
+    )
+    return response.data;
+}
+export const removeEnrollment = async (courseId: string, userId: string) => {
+    console.log("deleting: user", userId, "with course", courseId)
+    const response = await axiosWithCredentials.delete(
+        `${ENROLLMENT_API}/${userId}/${courseId}`
     )
     return response.data;
 }

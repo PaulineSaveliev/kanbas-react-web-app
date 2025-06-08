@@ -4,7 +4,6 @@
 import { Button, Card, Col, FormControl, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from "react-redux"
 import ProtectedEdit from '../Courses/protectedEdit';
-import { addCourse, deleteCourse, updateCourse } from '../Courses/reducer';
 import { useEffect, useState } from 'react';
 import { addEnrollment, deleteEnrollment } from './enrReducer';
 import ProtectCourseAccess from './protectCourseAccess';
@@ -15,17 +14,21 @@ import * as courseClient from "../Courses/client"
 export default function Dashboard() {
     //const {courses} = useSelector((state: any) => state.courseReducer)
     const [courses, setCourses] = useState<any[]>([]);
+    const [allCourses, setAllCourses] = useState<any[]>([]);
+
     const {currentUser} = useSelector((state: any) => state.accountReducer);
-    const {enrollments} = useSelector((state: any) => state.enrollmentReducer);
-    const [enrollVis, setEnrollVis] = useState(currentUser.role !== "FACULTY")
-    const userEnrolled = courses;
-    const activeCourses = enrollVis ? userEnrolled : courses;
+
+    const [enrollVis, setEnrollVis] = useState(true)
+
+    const activeCourses = enrollVis ? courses : allCourses;
     const [course, setCourse] = useState({name: "New Name", description: "New Description", number: "New Number", startDate: "2000-01-01", endDate: "2000-01-01", image: "courseImg", _id: 9000})
     const dispatch = useDispatch();
     const fetchCourses = async () => {
       try {
           const courses2 = await userClient.findMyCourses(currentUser);
           setCourses(courses2);
+          const allCourses = await courseClient.fetchAllCourses();
+          setAllCourses(allCourses);
       } catch (error) {
           console.error(error);
       }
@@ -44,6 +47,16 @@ export default function Dashboard() {
         if(c._id === course._id) {return course;}
         else { return c }
       }))
+    }
+    const enrollUserInCourse = async (courseId: string) => {
+      await courseClient.createEnrollment(courseId, currentUser._id)
+      dispatch(addEnrollment({user: currentUser._id, course: course._id}))
+      fetchCourses();
+    }
+    const unenrollUserInCourse = async (courseId: string) => {
+      await courseClient.removeEnrollment(courseId, currentUser._id)
+      dispatch(deleteEnrollment({user: currentUser._id, course: course._id}))
+      fetchCourses();
     }
     useEffect(() => {
         fetchCourses(); 
@@ -79,9 +92,7 @@ export default function Dashboard() {
           <Row xs={1} md={5} className="g-4">
             {activeCourses
               .map((course: any) => {
-                const courseEnr = enrollments.find(
-                  (enr: any) => enr.user === currentUser._id && enr.course === course._id
-                );
+                const courseEnr = courses.find((c: any) => c._id === course._id);
                 return (
                 
               <Col className="wd-dashboard-course" style={{ width: "350px" }} id={`key-val-${course._id}`}>
@@ -98,12 +109,12 @@ export default function Dashboard() {
                         <Button variant="danger"
                             onClick={(event) => {
                               event.preventDefault();
-                              dispatch(deleteEnrollment(courseEnr._id))}}
+                              unenrollUserInCourse(course._id)}}
                             >Unenroll</Button> : 
                         <Button variant="success"
                           onClick={(event) => {
                             event.preventDefault();
-                            dispatch(addEnrollment({user: currentUser._id, course: course._id}))}}
+                            enrollUserInCourse(course._id)}}
                           >Enroll</Button>}
                           <ProtectedEdit>
                     <Button onClick={(event) => {
