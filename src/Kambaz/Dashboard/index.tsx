@@ -94,7 +94,6 @@ export default function Dashboard() {
               .map((course: any) => {
                 const courseEnr = courses.find((c: any) => c._id === course._id);
                 return (
-                
               <Col className="wd-dashboard-course" style={{ width: "350px" }} id={`key-val-${course._id}`}>
                 <Card>
                 <ProtectCourseAccess courseId={course._id}>
@@ -103,29 +102,50 @@ export default function Dashboard() {
                     <Card.Title className="wd-dashboard-course-title text-nowrap overflow-hidden">{course.name}</Card.Title>
                     <Card.Text  className="wd-dashboard-course-description overflow-hidden" style={{ height: "100px" }}>
                       {course.description}</Card.Text>
-                      <div className="d-flex justify-content-between">
-                    <Button variant="primary">Go</Button>
-                    {courseEnr ? 
-                        <Button variant="danger"
+                      <div className="d-flex justify-content-between align-items-center">
+                      <div className="d-flex gap-2">
+                        <Button variant="primary">Go</Button>
+                        {!enrollVis && (
+                          courseEnr ? 
+                            <Button variant="danger"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                unenrollUserInCourse(course._id);
+                              }}>
+                              Unenroll
+                            </Button>
+                          : 
+                            <Button variant="success"
+                              onClick={(event) => {
+                                event.preventDefault();
+                                enrollUserInCourse(course._id);
+                              }}>
+                              Enroll
+                            </Button>
+                        )}
+                      </div>
+                      <ProtectedEdit>
+                        <div className="d-flex gap-2 ms-auto">
+                          <Button
                             onClick={(event) => {
                               event.preventDefault();
-                              unenrollUserInCourse(course._id)}}
-                            >Unenroll</Button> : 
-                        <Button variant="success"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            enrollUserInCourse(course._id)}}
-                          >Enroll</Button>}
-                          <ProtectedEdit>
-                    <Button onClick={(event) => {
-                      event.preventDefault();
-                      deleteCourse(course._id);
-                    }} className="btn btn-danger float-end" id="wd-delete-course-click">Delete</Button>
-                    <Button onClick={(event) => {
-                      event.preventDefault();
-                      setCourse(course);
-                    }} className="btn btn-warning me-2 float-end" id="wd-edit-course-click">Edit</Button>
-                    </ProtectedEdit>
+                              deleteCourse(course._id);
+                            }}
+                            className="btn btn-danger"
+                            id="wd-delete-course-click">
+                            Delete
+                          </Button>
+                          <Button
+                            onClick={(event) => {
+                              event.preventDefault();
+                              setCourse(course);
+                            }}
+                            className="btn btn-warning"
+                            id="wd-edit-course-click">
+                            Edit
+                          </Button>
+                        </div>
+                      </ProtectedEdit>
                     </div>
                   </Card.Body>
                 </ProtectCourseAccess>

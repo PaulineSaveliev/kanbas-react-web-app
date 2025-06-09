@@ -4,9 +4,24 @@
 import { Table } from "react-bootstrap";
 import { FaUserCircle } from "react-icons/fa";
 import PeopleDetails from "./Details";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import * as client from "../client"
+import { useEffect, useState } from "react";
 
 export default function PeopleTable({users = []}: {users?: any[]}) {
+    const {pathname} = useLocation();
+    const [people, setPeople] = useState<any[]>(users)
+    const getUsers = async () => {
+        if (pathname.includes("Courses")) {
+            const result = await client.findUsersForCourse(pathname.split('/')[3]);
+            setPeople(result);
+        } else {
+            setPeople(users);
+        }
+    }
+    useEffect(() => {
+        getUsers();
+    }, [users, pathname])
  return (
   <div id="wd-people-table">
    <Table striped>
@@ -15,7 +30,7 @@ export default function PeopleTable({users = []}: {users?: any[]}) {
     </thead>
         <tbody>
             <PeopleDetails />
-            {users
+            {people
             .map((user: any) => (
                 <tr key={user._id}>
                     <td className="wd-full-name text-nowrap">
