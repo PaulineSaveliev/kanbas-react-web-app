@@ -36,18 +36,17 @@ export default function Dashboard() {
     const addNewCourse = async () => {
       const newCourse = await userClient.createCourse(course, currentUser._id);
       setCourses([...courses, newCourse]);
+      fetchCourses();
     }
     const deleteCourse = async (courseId: string) => {
       const status = await courseClient.deleteCourse(courseId);
       console.log(status);
       setCourses(courses.filter((course) => course._id !== courseId));
+      fetchCourses();
     }
     const updateCourse = async () => {
       await courseClient.updateCourse(course);
-      setCourses(courses.map((c) => {
-        if(c._id === course._id) {return course;}
-        else { return c }
-      }))
+      fetchCourses();
     }
     const enrollUserInCourse = async (courseId: string) => {
       await courseClient.createEnrollment(courseId, currentUser._id)
@@ -86,7 +85,7 @@ export default function Dashboard() {
                   id="wd-update-course-click"
                   onClick={() => {
                     setEnrollVis(!enrollVis)
-                    }}>{enrollVis ?  `Show Unenrolled` : "Hide Unenrolled"}</Button>
+                    }}>{enrollVis ?  `All Courses` : "My Courses"}</Button>
         </div>
         <hr />
         <div id="wd-dashboard-courses">
